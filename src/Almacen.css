@@ -1,0 +1,22 @@
+.ag-theme-quartz{
+    --ag-foreground-color: rgb(12, 12, 12);
+    --ag-background-color: rgb(255, 255, 255);
+    --ag-header-background-color:    rgb(43,108,176);
+    --ag-header-foreground-color:      rgb(248, 232, 6);
+    --ag-row-hover-color:  rgb(242, 228, 191);
+    --ag-header-column-resize-handle-color: rgb(126, 46, 132);    
+    --ag-icon-font-color-ag-sort-descending-icon: rgb(248, 245, 245);
+}
+
+
+.ag-theme-quartz2 {
+    --ag-foreground-color: rgb(126, 46, 132);
+    --ag-background-color: rgba(245, 244, 243, 0.974);
+    --ag-header-foreground-color: rgb(204, 245, 172);
+    --ag-header-background-color: rgb(209, 64, 129);
+    --ag-odd-row-background-color: rgb(0, 0, 0, 0.03);
+    --ag-header-column-resize-handle-color: rgb(126, 46, 132);
+
+    --ag-font-size: 17px;
+    --ag-font-family: monospace;
+}
