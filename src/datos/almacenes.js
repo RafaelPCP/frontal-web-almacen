@@ -18,14 +18,14 @@ export const fetchAlmacenes = async (setState) => {
   communs.fetchData("almacenes", setState);
 };
 
-const addAlmacen = async (newAlmacen) => {
+export const addAlmacen = async (newAlmacen) => {
   communs.addData("almacenes", newAlmacen);
 };
 
-const updateAlmacen = async (almacenId, updatedData) => {
+export const updateAlmacen = async (almacenId, updatedData) => {
   communs.updateData("almacenes",almacenId,updatedData)
 };
 
-const deleteAlmacen = async (almacenId) => {
+export const deleteAlmacen = async (almacenId) => {
   communs.deleteData("almacenes",almacenId)
 };

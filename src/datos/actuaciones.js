@@ -20,3 +20,21 @@ export const actuaciones = [
     actuacion: "Actualización",
   },
 ];
+
+import * as communs from "./communs";
+
+export const fetchActuaciones = async (setState) => {
+  communs.fetchData("actuaciones", setState);
+};
+
+export const addActuacion = async (newActuacion) => {
+  communs.addData("actuaciones", newActuacion);
+};
+
+export const updateActuacion = async (actuacionId, updatedData) => {
+  communs.updateData("actuaciones",actuacionId,updatedData)
+};
+
+export const deleteActuacion = async (actuacionId) => {
+  communs.deleteData("actuaciones",actuacionId)
+};

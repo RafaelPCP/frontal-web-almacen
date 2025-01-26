@@ -28,3 +28,22 @@ export const listadodocumentos = [
     fecha: "01/07/2024",
   },
 ];
+
+import * as communs from "./communs";
+
+export const fetchListadodocumentos = async (setState) => {
+  communs.fetchData("listadodocumentos", setState);
+};
+
+export const addListadodocumentos = async (newListadodocumentos) => {
+  communs.addData("listadodocumentos", newListadodocumentos);
+};
+
+export const updateListadodocumentos = async (listadodocumentosId, updatedData) => {
+  communs.updateData("listadodocumentos",listadodocumentosId,updatedData)
+};
+
+export const deleteListadodocumentos = async (listadodocumentosId) => {
+  communs.deleteData("listadodocumentos",listadodocumentosId)
+};
+

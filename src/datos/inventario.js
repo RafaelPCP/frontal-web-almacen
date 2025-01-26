@@ -180,3 +180,22 @@ export const inventario = [
     imagenfinal: "2",
   },
 ];
+
+
+import * as communs from "./communs";
+
+export const fetchInventarios = async (setState) => {
+  communs.fetchData("inventarios", setState);
+};
+
+export const addInventario = async (newInventario) => {
+  communs.addData("inventarios", newInventario);
+};
+
+export const updateInventario = async (inventarioId, updatedData) => {
+  communs.updateData("inventarios",inventarioId,updatedData)
+};
+
+export const deleteInventario = async (inventarioId) => {
+  communs.deleteData("inventarios",inventarioId)
+};

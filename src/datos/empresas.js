@@ -60,3 +60,22 @@ export const empresas = [
     contacto: "Javier",
   },
 ];
+
+
+import * as communs from "./communs";
+
+export const fetchEmpresas = async (setState) => {
+  communs.fetchData("empresas", setState);
+};
+
+export const addEmpresa = async (newEmpresa) => {
+  communs.addData("empresas", newEmpresa);
+};
+
+export const updateEmpresa = async (empresaId, updatedData) => {
+  communs.updateData("empresas",empresaId,updatedData)
+};
+
+export const deleteEmpresa = async (empresaId) => {
+  communs.deleteData("empresas",empresaId)
+};
