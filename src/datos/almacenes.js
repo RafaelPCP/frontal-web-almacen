@@ -15,11 +15,17 @@ export const almacenes = [
 import * as communs from "./communs";
 
 export const fetchAlmacenes = async (setState) => {
-  try {
-    const almacenes = await communs.apiRequest("almacenes", "GET");
-    console.log("Fetched almacenes:", almacenes);
-    setState(almacenes);
-  } catch (error) {
-    console.error("Failed to fetch almacenes:", error.message);
-  }
+  communs.fetchData("almacenes", setState);
+};
+
+const addAlmacen = async (newAlmacen) => {
+  communs.addData("almacenes", newAlmacen);
+};
+
+const updateAlmacen = async (almacenId, updatedData) => {
+  communs.updateData("almacenes",almacenId,updatedData)
+};
+
+const deleteAlmacen = async (almacenId) => {
+  communs.deleteData("almacenes",almacenId)
 };

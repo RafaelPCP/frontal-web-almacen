@@ -1,4 +1,4 @@
-export const apiRequest = async (endpoint, method = "GET", body = null) => {
+const apiRequest = async (endpoint, method = "GET", body = null) => {
     const authHeader = localStorage.getItem("authHeader");
   
     if (!authHeader) {
@@ -35,4 +35,44 @@ export const apiRequest = async (endpoint, method = "GET", body = null) => {
       throw error; // Rethrow for the caller to handle
     }
   };
-  
+
+// Fetch data (GET)
+export const fetchData = async (endpoint, setState) => {
+  try {
+    const data = await apiRequest(endpoint, "GET");
+    console.log(`Fetched ${endpoint}:`, data);
+    setState(data);
+  } catch (error) {
+    console.error(`Failed to fetch ${endpoint}:`, error.message);
+  }
+};
+
+// Add data (POST)
+export const addData = async (endpoint, newData) => {
+  try {
+    const response = await apiRequest(endpoint, "POST", newData);
+    console.log(`${endpoint} added:`, response);
+  } catch (error) {
+    console.error(`Failed to add ${endpoint}:`, error.message);
+  }
+};
+
+// Update data (PUT)
+export const updateData = async (endpoint, id, updatedData) => {
+  try {
+    const response = await apiRequest(`${endpoint}/${id}`, "PUT", updatedData);
+    console.log(`${endpoint} updated:`, response);
+  } catch (error) {
+    console.error(`Failed to update ${endpoint}:`, error.message);
+  }
+};
+
+// Delete data (DELETE)
+export const deleteData = async (endpoint, id) => {
+  try {
+    await apiRequest(`${endpoint}/${id}`, "DELETE");
+    console.log(`${endpoint} with ID ${id} deleted.`);
+  } catch (error) {
+    console.error(`Failed to delete ${endpoint}:`, error.message);
+  }
+};
