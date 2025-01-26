@@ -99,7 +99,6 @@ export default function Almacen() {
     loadAlmacenes(); // Call the function
   }, []); // Empty dependency array ensures this runs only once
 
-
   const defaultColDef = useMemo(
     () => ({
       flex: 1,
@@ -112,14 +111,14 @@ export default function Almacen() {
   // Column Definitions: Defines the columns to be displayed.
   const [colDefs, setColDefs] = useState([
     {
-      field: "Laboratorio",
+      field: "laboratorio",
       cellRenderer: MyCellComponent,
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
       checkboxSelection: true,
     },
     {
-      field: "Ubicacion",
+      field: "almacen",
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
     },
@@ -161,7 +160,7 @@ export default function Almacen() {
           paginationPageSize={13}
           paginationPageSizeSelector={[13, 30]}
           pagination={true}
-        ></AgGridReact>        
+        ></AgGridReact>
         <Button align={"center"} colorScheme="blue">
           Añadir
         </Button>
