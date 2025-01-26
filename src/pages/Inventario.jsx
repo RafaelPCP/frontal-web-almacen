@@ -31,6 +31,8 @@ export default function Inventario() {
     );
   };
   */
+  //     <NavLink to={"/Inventario/" + p.value}>
+  //    onClick={() => setbotonPulsado("Ficha Producto")}
 
   const MyCellComponent = (p) => {
     console.log(p.value);
@@ -139,12 +141,24 @@ export default function Inventario() {
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           rowSelection={"multiRow"}
-          paginationPageSize={13}
-          paginationPageSizeSelector={[13, 30]}
+          paginationPageSize={10}
+          paginationPageSizeSelector={[10, 20]}
           pagination={true}
         >
           {" "}
         </AgGridReact>{" "}
+      </div>
+      <div>
+        <NavLink to={"/Inventario/" + 0}>
+          <Button
+            colorScheme="white"
+            size="s"
+            onClick={() => setbotonPulsado("Ficha Producto")}
+          >
+            Nuevo
+          </Button>
+          Nuevo
+        </NavLink>
       </div>
     </Container>
   );

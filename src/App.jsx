@@ -20,6 +20,7 @@ import Inventario from "./pages/Inventario";
 import Usuario from "./pages/Usuario";
 import Configura from "./pages/Configura";
 import FichaProducto from "./pages/Fichaproducto";
+import AddAlmacen from "./pages/AddAlmacen";
 
 import { ProductDetails } from "./pages/ProductDetails";
 import TiposProducto from "./pages/TiposProducto";
@@ -46,6 +47,14 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <Almacen />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="almacen/add"
+        element={
+          <AuthGuard>
+            <AddAlmacen />
           </AuthGuard>
         }
       ></Route>

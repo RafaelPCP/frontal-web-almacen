@@ -23,9 +23,9 @@ export const addAlmacen = async (newAlmacen) => {
 };
 
 export const updateAlmacen = async (almacenId, updatedData) => {
-  communs.updateData("almacenes",almacenId,updatedData)
+  communs.updateData("almacenes", almacenId, updatedData);
 };
 
 export const deleteAlmacen = async (almacenId) => {
-  communs.deleteData("almacenes",almacenId)
+  await communs.deleteData("almacenes", almacenId);
 };

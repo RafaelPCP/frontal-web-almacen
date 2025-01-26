@@ -29,7 +29,7 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { fetchAlmacenes } from "../datos/almacenes";
+import { fetchAlmacenes, deleteAlmacen } from "../datos/almacenes";
 import "../Almacen.css";
 import {
   _FloatingFilterModule,
@@ -37,15 +37,7 @@ import {
   FilterManager,
   FilterWrapperComp,
 } from "ag-grid-community";
-
-const MyCellComponent = (p) => {
-  return (
-    <>
-          <button onClick={() => window.alert("Accion!")}>+</button>   {" "}
-      {p.value} {" "}
-    </>
-  );
-};
+import { Navigate, NavLink } from "react-router-dom";
 
 const tableStyles = {
   color: "black",
@@ -66,29 +58,29 @@ const buttonStyles = {
 };
 
 export default function Almacen() {
-  // Row Data: The data to be displayed.
-
-  /*
-  const [rowData, setRowData] = useState([
-    { Laboratorio: "Granada", Ubicacion: "Granada" },
-    { Laboratorio: "Córdoba", Ubicacion: "Córdoba" },
-    { Laboratorio: "Málaga", Ubicacion: "Málaga" },
-    { Laboratorio: "Sevilla", Ubicacion: "Sevilla" },
-    { Laboratorio: "Almería", Ubicacion: "Almería" },
-    { Laboratorio: "Cuevas Bajas", Ubicacion: "Almería" },
-    { Laboratorio: "Madrid", Ubicacion: "Getafe" },
-    { Laboratorio: "Valladolid", Ubicacion: "Valladolid" },
-    { Laboratorio: "Zamora", Ubicacion: "Zamora" },
-    { Laboratorio: "Salamanca", Ubicacion: "Salamanca" },
-    { Laboratorio: "Asturias", Ubicacion: "Oviedo" },
-  ]);
-*/
   const [rowData, setRowData] = useState([]); // Initialize with an empty array
   const gridRef = useRef();
   //const [rowData,setRowData]=useState();
   useEffect(() => {
     fetchAlmacenes(setRowData);
-  }, []); // Empty dependency array ensures this runs only once
+  }, [, deleteAlmacen]); // Empty dependency array ensures this runs only once
+
+  const MyCellComponent = (p) => {
+    return (
+      <>
+        {" "}
+        <Button
+          size="xs"
+          colorScheme="red"
+          onClick={() => {
+            deleteAlmacen(p.value);
+          }}
+        >
+          Eliminar
+        </Button>
+      </>
+    );
+  };
 
   const defaultColDef = useMemo(
     () => ({
@@ -103,13 +95,17 @@ export default function Almacen() {
   const [colDefs, setColDefs] = useState([
     {
       field: "laboratorio",
-      cellRenderer: MyCellComponent,
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
-      checkboxSelection: true,
     },
     {
       field: "almacen",
+      filter: "agTextColumnFilter",
+      filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
+    },
+    {
+      field: "id",
+      cellRenderer: MyCellComponent,
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
     },
@@ -128,6 +124,8 @@ export default function Almacen() {
     console.log("Applying Filter Model", filterModel);
     gridRef.current.api.setFilterModel(filterModel);
   }, []);
+
+  const [botonpulsado, setbotonPulsado] = useState();
 
   return (
     <Container
@@ -152,9 +150,15 @@ export default function Almacen() {
           paginationPageSizeSelector={[13, 30]}
           pagination={true}
         ></AgGridReact>
-        <Button align={"center"} colorScheme="blue">
-          Añadir
-        </Button>
+        <NavLink to={"/Almacen/add"}>
+          <Button
+            align={"center"}
+            colorScheme="blue"
+            onClick={() => setbotonPulsado("Ficha Producto")}
+          >
+            Añadir
+          </Button>
+        </NavLink>
       </div>
     </Container>
   );
