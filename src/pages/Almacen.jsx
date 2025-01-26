@@ -73,7 +73,9 @@ export default function Almacen() {
           size="xs"
           colorScheme="red"
           onClick={() => {
-            deleteAlmacen(p.value);
+            deleteAlmacen(p.value).then(() => {
+              fetchAlmacenes(setRowData);
+            });
           }}
         >
           Eliminar
