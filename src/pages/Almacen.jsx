@@ -86,18 +86,7 @@ export default function Almacen() {
   const [rowData, setRowData] = useState([]); // Initialize with an empty array
   const gridRef = useRef();
   //const [rowData,setRowData]=useState();
-  useEffect(() => {
-    const loadAlmacenes = async () => {
-      try {
-        const data = await fetchAlmacenes(); // Fetch almacenes data
-        setRowData(data); // Set the data in the state
-      } catch (error) {
-        console.error("Failed to load almacenes:", error.message);
-      }
-    };
-
-    loadAlmacenes(); // Call the function
-  }, []); // Empty dependency array ensures this runs only once
+  useEffect(() => fetchAlmacenes(setRowData), []); // Empty dependency array ensures this runs only once
 
   const defaultColDef = useMemo(
     () => ({

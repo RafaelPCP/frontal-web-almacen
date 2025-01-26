@@ -14,11 +14,11 @@ export const almacenes = [
 
 import * as communs from "./communs";
 
-export const fetchAlmacenes = async () => {
+export const fetchAlmacenes = async (setState) => {
   try {
     const almacenes = await communs.apiRequest("almacenes", "GET");
     console.log("Fetched almacenes:", almacenes);
-    return almacenes;
+    setState(almacenes);
   } catch (error) {
     console.error("Failed to fetch almacenes:", error.message);
   }
