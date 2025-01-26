@@ -41,7 +41,6 @@ const router = createBrowserRouter(
           </AuthGuard>
         }
       ></Route>
-
       <Route
         path="almacen"
         element={

@@ -86,7 +86,9 @@ export default function Almacen() {
   const [rowData, setRowData] = useState([]); // Initialize with an empty array
   const gridRef = useRef();
   //const [rowData,setRowData]=useState();
-  useEffect(() => fetchAlmacenes(setRowData), []); // Empty dependency array ensures this runs only once
+  useEffect(() => {
+    fetchAlmacenes(setRowData);
+  }, []); // Empty dependency array ensures this runs only once
 
   const defaultColDef = useMemo(
     () => ({
