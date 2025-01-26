@@ -18,3 +18,21 @@ export const listadoactuaciones = [
     fecha: "01/07/2024",
   },
 ];
+
+import * as communs from "./communs";
+
+export const fetchListadoactuaciones = async (setState) => {
+  communs.fetchData("listadoactuacion", setState);
+};
+
+export const addListadoactuacion = async (newListadoactuacion) => {
+  communs.addData("listadoactuacion", newListadoactuacion);
+};
+
+export const updateListadoactuacion = async (listadoactuacionId, updatedData) => {
+  communs.updateData("listadoactuacion",listadoactuacionId,updatedData)
+};
+
+export const deleteListadoactuacion = async (listadoactuacionId) => {
+  communs.deleteData("listadoactuacion",listadoactuacionId)
+};
