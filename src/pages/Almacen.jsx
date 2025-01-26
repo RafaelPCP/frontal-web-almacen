@@ -29,7 +29,7 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { almacenes } from "../datos/almacenes";
+import { fetchAlmacenes } from "../datos/almacenes";
 import "../Almacen.css";
 import {
   _FloatingFilterModule,
@@ -83,9 +83,22 @@ export default function Almacen() {
     { Laboratorio: "Asturias", Ubicacion: "Oviedo" },
   ]);
 */
-  const [rowData, setRowData] = useState(almacenes);
+  const [rowData, setRowData] = useState([]); // Initialize with an empty array
   const gridRef = useRef();
   //const [rowData,setRowData]=useState();
+  useEffect(() => {
+    const loadAlmacenes = async () => {
+      try {
+        const data = await fetchAlmacenes(); // Fetch almacenes data
+        setRowData(data); // Set the data in the state
+      } catch (error) {
+        console.error("Failed to load almacenes:", error.message);
+      }
+    };
+
+    loadAlmacenes(); // Call the function
+  }, []); // Empty dependency array ensures this runs only once
+
 
   const defaultColDef = useMemo(
     () => ({
