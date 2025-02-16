@@ -3,41 +3,14 @@ import {
   Button,
   Center,
   Container,
-  Flex,
-  List,
-  ListIcon,
-  ListItem,
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Td,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
 } from "@chakra-ui/react";
-import {
-  ArrowRightIcon,
-  UnlockIcon,
-  SettingsIcon,
-  ViewIcon,
-  CalendarIcon,
-  SunIcon,
-} from "@chakra-ui/icons";
 
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { fetchAlmacenes, deleteAlmacen } from "../datos/almacenes";
-import "../Almacen.css";
-import {
-  _FloatingFilterModule,
-  DateFilter,
-  FilterManager,
-  FilterWrapperComp,
-} from "ag-grid-community";
-import { Navigate, NavLink } from "react-router-dom";
+import { fetchAlmacenes, deleteAlmacen } from "../../datos/almacenes";
+import "../../Almacen.css";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const tableStyles = {
   color: "black",
@@ -60,7 +33,8 @@ const buttonStyles = {
 export default function Almacen() {
   const [rowData, setRowData] = useState([]); // Initialize with an empty array
   const gridRef = useRef();
-  //const [rowData,setRowData]=useState();
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchAlmacenes(setRowData);
   }, [, deleteAlmacen]); // Empty dependency array ensures this runs only once
@@ -73,12 +47,21 @@ export default function Almacen() {
           size="xs"
           colorScheme="red"
           onClick={() => {
-            deleteAlmacen(p.value).then(() => {
+            deleteAlmacen(p.data.id).then(() => {
               fetchAlmacenes(setRowData);
             });
           }}
         >
           Eliminar
+        </Button>
+        <Button
+          size="xs"
+          colorScheme="blue"
+          onClick={() => {
+            navigate(`/Almacen/update/${p.data.id}?almacen=${p.data.almacen}&laboratorio=${p.data.laboratorio}`)
+          }}
+        >
+          Actualizar
         </Button>
       </>
     );
@@ -104,9 +87,7 @@ export default function Almacen() {
       field: "almacen",
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
-    },
-    {
-      field: "id",
+    },{
       cellRenderer: MyCellComponent,
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
@@ -165,61 +146,3 @@ export default function Almacen() {
     </Container>
   );
 }
-/*
-export default function Almacen() {
-  return (
-   
-    <Container id="almac" pl='10px' pr='10px' pt='100'  as ="section"  > 
-    <Center height='20px'></Center>
-        <TableContainer>
-              <Table variant='simple'>
-                <TableCaption >Listado de almacenes</TableCaption>
-                <Thead>
-                  <Tr>
-                    <Th>Id</Th>
-                    <Th>Ubicación</Th> 
-                    <Th>p</Th> 
-                  </Tr>
-                </Thead>
-                <Tbody >
-                  <Tr sx={tableStyles}>
-                    <Td>01</Td>
-                    <Td>Laboratorio Granada</Td>   
-                    <Td>
-                        <Button   
-                          sx={buttonStyles} as={Button} leftIcon={<ArrowRightIcon />} >                          
-                        </Button>
-                    </Td>                 
-                  </Tr>
-                  <Tr sx={tableStyles}>
-                    <Td>02</Td>
-                    <Td>Laboratorio Jaén</Td>   
-                    <Td>
-                        <Button   
-                          sx={buttonStyles} as={Button} leftIcon={<ArrowRightIcon />} >                          
-                        </Button>
-                    </Td>                   
-                  </Tr>
-                  <Tr sx={tableStyles}>
-                    <Td>03</Td>
-                    <Td>Laboratorio Córdoba</Td>   
-                    <Td>
-                        <Button   
-                          sx={buttonStyles} as={Button} leftIcon={<ArrowRightIcon />} >                          
-                        </Button>
-                    </Td>                    
-                  </Tr>
-                </Tbody>
-                <Tfoot>
-                  <Tr>  
-                  <Td>-</Td>  
-                  <Td>-</Td>  
-                  <Td>-</Td>                   
-                  </Tr>
-                </Tfoot>
-              </Table>
-        </TableContainer>
-    </Container>
-  )
-}
-*/

@@ -14,18 +14,17 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 import { _FloatingFilterModule } from "ag-grid-community";
-import { blueGrey, red } from "@mui/material/colors";
 
-import { NavLink } from "react-router-dom";
-import { tipos } from "../datos/tipos";
+import { estados } from "../../datos/estados";
 import { TfiSave } from "react-icons/tfi";
 import { FaPencil } from "react-icons/fa6";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { IoIosAddCircle } from "react-icons/io";
+import { Navigate, NavLink } from "react-router-dom";
 
-export default function TiposProducto() {
+export default function EstadosProducto() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState(tipos);
+  const [rowData, setRowData] = useState(estados);
 
   const [botonpulsado, setbotonPulsado] = useState();
 
@@ -36,7 +35,7 @@ export default function TiposProducto() {
       maxWidth: "30",
     },
     {
-      field: "tipo",
+      field: "estado",
       editable: true,
     },
   ]);
@@ -68,18 +67,9 @@ export default function TiposProducto() {
           defaultColDef={defaultColDef}
           rowSelection={"multiRow"}
           paginationPageSize={10}
-          paginationPageSizeSelector={[10, 30]}
+          paginationPageSizeSelector={[10]}
           pagination={true}
         ></AgGridReact>
-        <NavLink to={"/TiposProducto/add"}>
-          <Button
-            align={"center"}
-            colorScheme="blue"
-            onClick={() => setbotonPulsado("Ficha Producto")}
-          >
-            Añadir
-          </Button>
-        </NavLink>
       </div>
     </Container>
   );
@@ -95,10 +85,11 @@ export default function TiposProducto() {
         </Button>
         <Button
           fontSize={14}
+          variant="outline"
           colorScheme="purple"
           leftIcon={<IoIosAddCircle />}
         >
-          Nuevo Tipo
+          Nuevo Estado
         </Button>
       </ButtonGroup>
       */

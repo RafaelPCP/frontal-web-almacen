@@ -16,7 +16,7 @@ import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { Flex, Spacer } from "@chakra-ui/react";
-import { addAlmacen } from "../datos/almacenes";
+import { addAlmacen } from "../../datos/almacenes";
 
 export default function AddAlmacen() {
   const navigate = useNavigate();

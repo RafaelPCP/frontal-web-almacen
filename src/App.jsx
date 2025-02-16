@@ -2,8 +2,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
-  useParams,
+  RouterProvider
 } from "react-router-dom";
 
 // Login
@@ -11,26 +10,22 @@ import AuthGuard from "./component/AuthGuard";
 
 // layouts and pages
 import RootLayout from "./layouts/RootLayout";
-import Identificacion, { enterClave } from "./pages/Identificacion";
+import Identificacion from "./pages/Identificacion";
 import MenuPrincipal from "./pages/MenuPrincipal";
-import Profile from "./pages/Profile";
-import Almacen from "./pages/Almacen";
-import Empresas from "./pages/Empresas";
+import Almacen from "./pages/Almacen/Almacen";
+import Empresas from "./pages/Empresas/Empresas";
 import Inventario from "./pages/Inventario";
 import Usuario from "./pages/Usuario";
 import Configura from "./pages/Configura";
-import FichaProducto from "./pages/Fichaproducto";
-import AddAlmacen from "./pages/AddAlmacen";
-import AddEstados from "./pages/AddEstados";
-import AddTipo from "./pages/AddTipo";
+import FichaProducto from "./pages/FichaProducto";
+import AddAlmacen from "./pages/Almacen/AddAlmacen";
 
-import { ProductDetails } from "./pages/ProductDetails";
-import TiposProducto from "./pages/TiposProducto";
-import EstadosProducto from "./pages/EstadosProducto";
+import TiposProducto from "./pages/TiposProducto/TiposProducto";
+import EstadosProducto from "./pages/EstadosProducto/EstadosProducto";
 import ActuacionesProducto from "./pages/ActuacionesProducto";
 import AddActuaciones from "./pages/AddActuaciones";
 import AddInventario from "./pages/AddInventario";
-import AddEmpresas from "./pages/AddEmpresas";
+import UpdateAlmacen from "./pages/Almacen/UpdateAlmacen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,6 +58,14 @@ const router = createBrowserRouter(
           </AuthGuard>
         }
       ></Route>
+        <Route
+        path="almacen/update/:id"
+        element={
+          <AuthGuard>
+            <UpdateAlmacen />
+          </AuthGuard>
+        }
+      ></Route>
       <Route
         path="tiposproducto"
         element={
@@ -72,26 +75,10 @@ const router = createBrowserRouter(
         }
       ></Route>
       <Route
-        path="tiposproducto/add"
-        element={
-          <AuthGuard>
-            <AddTipo />
-          </AuthGuard>
-        }
-      ></Route>
-      <Route
         path="estadosproducto"
         element={
           <AuthGuard>
             <EstadosProducto />
-          </AuthGuard>
-        }
-      ></Route>
-      <Route
-        path="estadosproducto/add"
-        element={
-          <AuthGuard>
-            <AddEstados />
           </AuthGuard>
         }
       ></Route>
@@ -164,14 +151,6 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <Empresas />
-          </AuthGuard>
-        }
-      ></Route>
-      <Route
-        path="empresas/add"
-        element={
-          <AuthGuard>
-            <AddEmpresas />
           </AuthGuard>
         }
       ></Route>

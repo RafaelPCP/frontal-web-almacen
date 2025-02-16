@@ -18,6 +18,11 @@ export const fetchAlmacenes = async (setState) => {
   communs.fetchData("almacenes", setState);
 };
 
+export const fetchAlmacenById = async(setState, id) => {
+  console.log("called")
+  communs.fetchData(`almacenes/${id}`, setState);
+};
+
 export const addAlmacen = async (newAlmacen) => {
   communs.addData("almacenes", newAlmacen);
 };

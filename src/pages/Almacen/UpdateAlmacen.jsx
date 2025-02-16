@@ -8,31 +8,38 @@ import {
   Container,
   HStack,
   Button,
+  Text,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
 
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { addTipos } from "../datos/tipos";
+import { fetchAlmacenById, updateAlmacen } from "../../datos/almacenes";
 
-export default function AddTipo() {
+export default function UpdateAlmacen() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { id } = useParams();
+  const almacenOriginal = searchParams.get("almacen"); 
+  const laboratorioOriginal = searchParams.get("laboratorio")
+ 
+  const [laboratorio, setLaboratorio] = React.useState(laboratorioOriginal);
+  const [almacen, setAlmacen] = React.useState(almacenOriginal);
 
-  const [tipo, setTipo] = React.useState("");
-
-  const createTipo = (event) => {
+  const actualizarAlmacen = (event) => {
     event.preventDefault();
-    addTipos({ tipo });
-    console.log({ tipo });
-    navigate("/TiposProducto");
+    updateAlmacen(id,{ laboratorio, almacen });
+    console.log({ laboratorio, almacen });
+    navigate("/Almacen");
   };
+
   enableRipple(true);
   return (
     <Container
-      id="estad"
+      id="almac"
       pl="10px"
       pr="10px"
       pt="120"
@@ -52,7 +59,7 @@ export default function AddTipo() {
           <Flex p="2">
             <Spacer />
             <Text textAlign="center" fontSize={28}>
-              Tipos de Productos
+              Ficha del Equipo
             </Text>
             <Spacer />
             <button onClick={() => navigate(-1)}>{} ↩️</button>
@@ -66,10 +73,24 @@ export default function AddTipo() {
               width={450}
               isRequired
             >
-              <FormLabel>Tipo</FormLabel>
+              <FormLabel>Laboratorio</FormLabel>
               <Input
-                placeholder="Tipo"
-                onChange={(e) => setTipo(e.target.value)}
+                placeholder="Laboratorio"
+                onChange={(e) => setLaboratorio(e.target.value)}
+                value={laboratorio}
+              />
+            </FormControl>
+            <FormControl
+              borderColor="blue.900"
+              pl="10px"
+              width={450}
+              isRequired
+            >
+              <FormLabel>Almacen</FormLabel>
+              <Input
+                placeholder="Almacen"
+                onChange={(e) => setAlmacen(e.target.value)}
+                value={almacen}
               />
             </FormControl>
           </HStack>
@@ -83,7 +104,7 @@ export default function AddTipo() {
           colorScheme="blue"
           align="center"
           leftIcon={<TfiSave />}
-          onClick={createTipo}
+          onClick={actualizarAlmacen}
         >
           Guardar
         </Button>
