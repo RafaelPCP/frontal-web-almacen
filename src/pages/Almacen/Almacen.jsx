@@ -11,6 +11,8 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import { fetchAlmacenes, deleteAlmacen } from "../../datos/almacenes";
 import "../../Almacen.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import "../../component/ColumnaDeAcciones";
+import ColumnaDeAcciones from "../../component/ColumnaDeAcciones";
 
 const tableStyles = {
   color: "black",
@@ -32,40 +34,21 @@ const buttonStyles = {
 
 export default function Almacen() {
   const [rowData, setRowData] = useState([]); // Initialize with an empty array
+  const [almacenIsDeleted, setalmacenIsDeleted] = useState(false)
   const gridRef = useRef();
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchAlmacenes(setRowData);
-  }, [, deleteAlmacen]); // Empty dependency array ensures this runs only once
+  }, [, almacenIsDeleted]); // Empty dependency array ensures this runs only once
 
-  const MyCellComponent = (p) => {
-    return (
-      <>
-        {" "}
-        <Button
-          size="xs"
-          colorScheme="red"
-          onClick={() => {
-            deleteAlmacen(p.data.id).then(() => {
-              fetchAlmacenes(setRowData);
-            });
-          }}
-        >
-          Eliminar
-        </Button>
-        <Button
-          size="xs"
-          colorScheme="blue"
-          onClick={() => {
-            navigate(`/Almacen/update/${p.data.id}?almacen=${p.data.almacen}&laboratorio=${p.data.laboratorio}`)
-          }}
-        >
-          Actualizar
-        </Button>
-      </>
-    );
-  };
+
+  const updateRouteAlmacen = (data) => {
+    return `/Almacen/update/${data.id}?almacen=${data.almacen}&laboratorio=${data.laboratorio}`
+  }
+  const ColunaAccionesAlmacen = (p) => {
+    return <ColumnaDeAcciones data={p.data} deleteAction={deleteAlmacen} updateRoute={updateRouteAlmacen} event={setalmacenIsDeleted} />
+  }
 
   const defaultColDef = useMemo(
     () => ({
@@ -88,7 +71,7 @@ export default function Almacen() {
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
     },{
-      cellRenderer: MyCellComponent,
+      cellRenderer: ColunaAccionesAlmacen,
       filter: "agTextColumnFilter",
       filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
     },

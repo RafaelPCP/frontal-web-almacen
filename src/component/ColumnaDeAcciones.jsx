@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-const ColumnaDeAcciones = ({ data, deleteAction, updateRoute }) => {
+const ColumnaDeAcciones = ({ data, deleteAction, updateRoute, event}) => {
   const navigate = useNavigate();
 
   return (
@@ -10,7 +10,7 @@ const ColumnaDeAcciones = ({ data, deleteAction, updateRoute }) => {
         size="xs"
         colorScheme="red"
         onClick={() => {
-          deleteAction(data.id); // Call the passed delete action
+          deleteAction(data.id).then(()=>{event(prevState => !prevState)}); // Call the passed delete action
         }}
       >
         Eliminar
