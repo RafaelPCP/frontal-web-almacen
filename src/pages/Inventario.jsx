@@ -149,15 +149,14 @@ export default function Inventario() {
         </AgGridReact>{" "}
       </div>
       <div>
-        <NavLink to={"/Inventario/" + 0}>
+        <NavLink to={"/Inventario/add"}>
           <Button
-            colorScheme="white"
+            colorScheme="blue"
             size="s"
-            onClick={() => setbotonPulsado("Ficha Producto")}
+            onClick={() => setbotonPulsado("Inventario")}
           >
-            Nuevo
+            Añadir
           </Button>
-          Nuevo
         </NavLink>
       </div>
     </Container>

@@ -20,6 +20,7 @@ import { TfiSave } from "react-icons/tfi";
 import { FaPencil } from "react-icons/fa6";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { IoIosAddCircle } from "react-icons/io";
+import { Navigate, NavLink } from "react-router-dom";
 
 export default function EstadosProducto() {
   const gridRef = useRef();
@@ -69,9 +70,22 @@ export default function EstadosProducto() {
           paginationPageSizeSelector={[10]}
           pagination={true}
         ></AgGridReact>
+        <NavLink to={"/EstadosProducto/add"}>
+          <Button
+            align={"center"}
+            colorScheme="blue"
+            onClick={() => setbotonPulsado("Ficha Producto")}
+          >
+            Añadir
+          </Button>
+        </NavLink>
       </div>
+    </Container>
+  );
+}
 
-      <ButtonGroup variant="outline" spacing="2">
+/*
+<ButtonGroup variant="outline" spacing="2">
         <Button colorScheme="blue" leftIcon={<FaPencil />}>
           Modificar
         </Button>
@@ -87,6 +101,4 @@ export default function EstadosProducto() {
           Nuevo Estado
         </Button>
       </ButtonGroup>
-    </Container>
-  );
-}
+      */

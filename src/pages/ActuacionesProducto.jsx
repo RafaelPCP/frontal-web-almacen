@@ -71,9 +71,22 @@ export default function ActuacionesProducto() {
           paginationPageSizeSelector={[10, 30]}
           pagination={true}
         ></AgGridReact>
+        <NavLink to={"/ActuacionesProducto/add"}>
+          <Button
+            align={"center"}
+            colorScheme="blue"
+            onClick={() => setbotonPulsado("Ficha Producto")}
+          >
+            Añadir
+          </Button>
+        </NavLink>
       </div>
+    </Container>
+  );
+}
 
-      <ButtonGroup variant="outline" spacing="2">
+/*
+<ButtonGroup variant="outline" spacing="2">
         <Button colorScheme="blue" leftIcon={<FaPencil />}>
           Modificar
         </Button>
@@ -90,6 +103,4 @@ export default function ActuacionesProducto() {
           Nueva Actuación
         </Button>
       </ButtonGroup>
-    </Container>
-  );
-}
+      */

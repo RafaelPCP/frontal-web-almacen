@@ -156,10 +156,16 @@ export default function Empresas() {
           paginationPageSizeSelector={[10, 20]}
           pagination={true}
         ></AgGridReact>{" "}
+        <NavLink to={"/Empresas/add"}>
+          <Button
+            align={"center"}
+            colorScheme="blue"
+            onClick={() => setbotonPulsado("Empresa")}
+          >
+            Añadir
+          </Button>
+        </NavLink>
       </div>
-      <Button align={"center"} colorScheme="blue">
-        Añadir
-      </Button>
     </Container>
   );
 }

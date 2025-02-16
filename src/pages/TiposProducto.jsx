@@ -71,9 +71,22 @@ export default function TiposProducto() {
           paginationPageSizeSelector={[10, 30]}
           pagination={true}
         ></AgGridReact>
+        <NavLink to={"/TiposProducto/add"}>
+          <Button
+            align={"center"}
+            colorScheme="blue"
+            onClick={() => setbotonPulsado("Ficha Producto")}
+          >
+            Añadir
+          </Button>
+        </NavLink>
       </div>
+    </Container>
+  );
+}
 
-      <ButtonGroup variant="outline" spacing="2">
+/*
+<ButtonGroup variant="outline" spacing="2">
         <Button colorScheme="blue" leftIcon={<FaPencil />}>
           Modificar
         </Button>
@@ -88,6 +101,4 @@ export default function TiposProducto() {
           Nuevo Tipo
         </Button>
       </ButtonGroup>
-    </Container>
-  );
-}
+      */

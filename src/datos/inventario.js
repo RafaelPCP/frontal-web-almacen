@@ -181,7 +181,6 @@ export const inventario = [
   },
 ];
 
-
 import * as communs from "./communs";
 
 export const fetchInventarios = async (setState) => {
@@ -193,9 +192,9 @@ export const addInventario = async (newInventario) => {
 };
 
 export const updateInventario = async (inventarioId, updatedData) => {
-  communs.updateData("inventarios",inventarioId,updatedData)
+  communs.updateData("inventarios", inventarioId, updatedData);
 };
 
 export const deleteInventario = async (inventarioId) => {
-  communs.deleteData("inventarios",inventarioId)
+  communs.deleteData("inventarios", inventarioId);
 };

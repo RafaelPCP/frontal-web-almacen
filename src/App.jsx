@@ -21,11 +21,16 @@ import Usuario from "./pages/Usuario";
 import Configura from "./pages/Configura";
 import FichaProducto from "./pages/Fichaproducto";
 import AddAlmacen from "./pages/AddAlmacen";
+import AddEstados from "./pages/AddEstados";
+import AddTipo from "./pages/AddTipo";
 
 import { ProductDetails } from "./pages/ProductDetails";
 import TiposProducto from "./pages/TiposProducto";
 import EstadosProducto from "./pages/EstadosProducto";
 import ActuacionesProducto from "./pages/ActuacionesProducto";
+import AddActuaciones from "./pages/AddActuaciones";
+import AddInventario from "./pages/AddInventario";
+import AddEmpresas from "./pages/AddEmpresas";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -67,10 +72,26 @@ const router = createBrowserRouter(
         }
       ></Route>
       <Route
+        path="tiposproducto/add"
+        element={
+          <AuthGuard>
+            <AddTipo />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
         path="estadosproducto"
         element={
           <AuthGuard>
             <EstadosProducto />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="estadosproducto/add"
+        element={
+          <AuthGuard>
+            <AddEstados />
           </AuthGuard>
         }
       ></Route>
@@ -83,10 +104,26 @@ const router = createBrowserRouter(
         }
       ></Route>
       <Route
+        path="actuacionesproducto/add"
+        element={
+          <AuthGuard>
+            <AddActuaciones />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
         path="inventario"
         element={
           <AuthGuard>
             <Inventario />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="inventario/add"
+        element={
+          <AuthGuard>
+            <AddInventario />
           </AuthGuard>
         }
       ></Route>
@@ -95,14 +132,6 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <FichaProducto />
-          </AuthGuard>
-        }
-      ></Route>
-      <Route
-        path="inventario"
-        element={
-          <AuthGuard>
-            <Inventario />
           </AuthGuard>
         }
       ></Route>
@@ -135,6 +164,14 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <Empresas />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="empresas/add"
+        element={
+          <AuthGuard>
+            <AddEmpresas />
           </AuthGuard>
         }
       ></Route>
