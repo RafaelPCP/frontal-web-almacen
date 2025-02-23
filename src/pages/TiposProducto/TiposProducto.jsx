@@ -10,16 +10,14 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 import { NavLink} from "react-router-dom";
-import { tipos, fetchTipos, deleteTipos } from "../../datos/tipos";
-
-import ColumnaDeAcciones from "../../component/ColumnaDeAcciones"
+import { tipos, fetchTipos } from "../../datos/tipos";
 
 export default function TiposProducto() {
   const gridRef = useRef();
   const [rowData, setRowData] = useState([]); // Initialize with an empty array
   useEffect(() => {
     fetchTipos(setRowData);
-  }, [, deleteTipos]); // Empty dependency array ensures this runs only once
+  }, []); // Empty dependency array ensures this runs only once
 
 
   const [botonpulsado, setbotonPulsado] = useState();

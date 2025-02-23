@@ -14,7 +14,7 @@ import Identificacion from "./pages/Identificacion";
 import MenuPrincipal from "./pages/MenuPrincipal";
 import Almacen from "./pages/Almacen/Almacen";
 import Empresas from "./pages/Empresas/Empresas";
-import Inventario from "./pages/Inventario";
+import Inventario from "./pages/Inventario/Inventario";
 import Usuario from "./pages/Usuario";
 import Configura from "./pages/Configura";
 import FichaProducto from "./pages/FichaProducto";
@@ -22,9 +22,9 @@ import AddAlmacen from "./pages/Almacen/AddAlmacen";
 
 import TiposProducto from "./pages/TiposProducto/TiposProducto";
 import EstadosProducto from "./pages/EstadosProducto/EstadosProducto";
-import ActuacionesProducto from "./pages/ActuacionesProducto";
-import AddActuaciones from "./pages/AddActuaciones";
-import AddInventario from "./pages/AddInventario";
+import ActuacionesProducto from "./pages/ActuacionesProducto/ActuacionesProducto";
+import AddActuaciones from "./pages/ActuacionesProducto/AddActuaciones";
+import AddInventario from "./pages/Inventario/AddInventario";
 import UpdateAlmacen from "./pages/Almacen/UpdateAlmacen";
 
 const router = createBrowserRouter(

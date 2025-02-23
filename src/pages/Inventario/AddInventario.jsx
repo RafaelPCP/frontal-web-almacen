@@ -17,7 +17,7 @@ import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { Flex, Spacer } from "@chakra-ui/react";
-import { addInventario } from "../datos/inventario";
+import { addInventario } from "../../datos/inventario";
 
 export default function AddInventario() {
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { Flex, Spacer } from "@chakra-ui/react";
-import { addActuacion } from "../datos/actuaciones";
+import { addActuacion } from "../../datos/actuaciones";
 
 export default function AddActuaciones() {
   const navigate = useNavigate();

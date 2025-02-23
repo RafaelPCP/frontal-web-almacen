@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -13,21 +13,20 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-import { _FloatingFilterModule } from "ag-grid-community";
-import { blueGrey, red } from "@mui/material/colors";
-
 import { NavLink } from "react-router-dom";
-import { actuaciones } from "../datos/actuaciones";
-import { TfiSave } from "react-icons/tfi";
-import { FaPencil } from "react-icons/fa6";
-import { RiDeleteBack2Fill } from "react-icons/ri";
-import { IoIosAddCircle } from "react-icons/io";
+import { fetchActuaciones } from "../../datos/actuaciones"
 
 export default function ActuacionesProducto() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState(actuaciones);
+  const [rowData, setRowData] = useState([]);
+  useEffect(() => {
+    fetchActuaciones(setRowData);
+  }, []); // Empty dependency array ensures this runs only once
+
+
 
   const [botonpulsado, setbotonPulsado] = useState();
+
 
   const [columnDefs, setColumnDefs] = useState([
     {
@@ -84,23 +83,3 @@ export default function ActuacionesProducto() {
     </Container>
   );
 }
-
-/*
-<ButtonGroup variant="outline" spacing="2">
-        <Button colorScheme="blue" leftIcon={<FaPencil />}>
-          Modificar
-        </Button>
-        <Button colorScheme="blue" leftIcon={<RiDeleteBack2Fill />}>
-          Borrar
-        </Button>
-
-        <Button
-          fontSize={14}
-          variant="outline"
-          colorScheme="purple"
-          leftIcon={<IoIosAddCircle />}
-        >
-          Nueva Actuación
-        </Button>
-      </ButtonGroup>
-      */

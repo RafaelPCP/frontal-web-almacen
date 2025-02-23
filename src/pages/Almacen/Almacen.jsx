@@ -11,7 +11,6 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import { fetchAlmacenes, deleteAlmacen } from "../../datos/almacenes";
 import "../../Almacen.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import "../../component/ColumnaDeAcciones";
 import ColumnaDeAcciones from "../../component/ColumnaDeAcciones";
 
 const tableStyles = {

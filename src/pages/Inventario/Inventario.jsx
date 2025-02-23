@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { Button, Center, Container } from "@chakra-ui/react";
 import {} from "@chakra-ui/icons";
 
@@ -6,33 +6,15 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-import { _FloatingFilterModule } from "ag-grid-community";
-import { blueGrey, red } from "@mui/material/colors";
-
 import { NavLink } from "react-router-dom";
-import { inventario } from "../datos/inventario";
+import { fetchInventarios } from "../../datos/inventario";
 
 export default function Inventario() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState(inventario);
-
-  const [botonpulsado, setbotonPulsado] = useState();
-
-  /*
- const MyCellComponent = (p) => {
-    return (
-      <>
-        <NavLink state={{ some: "Prueba envío datos" }} to="/FichaProducto/">
-          <Button onClick={() => setbotonPulsado("Ficha Producto")}>▶️</Button>
-          console.log({p.value.estado});
-        </NavLink>
-        {p.value}
-      </>
-    );
-  };
-  */
-  //     <NavLink to={"/Inventario/" + p.value}>
-  //    onClick={() => setbotonPulsado("Ficha Producto")}
+  const [rowData, setRowData] = useState([]); // Initialize with an empty array
+  useEffect(() => {
+    fetchInventarios(setRowData);
+  }, []); // Empty dependency array ensures this runs only once
 
   const MyCellComponent = (p) => {
     console.log(p.value);
@@ -81,7 +63,7 @@ export default function Inventario() {
       flex: true,
     },
     {
-      field: "Almacen",
+      field: "almacen.almacen",
       filter: "agTextColumnFilter",
       editable: true,
       flex: true,
@@ -93,13 +75,13 @@ export default function Inventario() {
       flex: true,
     },
     {
-      field: "estado",
+      field: "estado.estado",
       filter: "agTextColumnFilter",
       editable: true,
       flex: true,
     },
     {
-      field: "tipo",
+      field: "tipo.tipo",
       filter: "agTextColumnFilter",
       editable: true,
       flex: true,
