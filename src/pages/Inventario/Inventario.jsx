@@ -22,7 +22,7 @@ export default function Inventario() {
   }, [, inventarioIsDeleted]);
 
   const updateRouteInventario = (data) => {
-    return `/Almacen/update/${data.id}?almacen=${data.almacen}&laboratorio=${data.laboratorio}`
+    return `/Inventario/update/${data.id}?equipo=${data.equipo}&etiqueta=${data.etiqueta}&numero_serie=${data.numero_serie}&tipo=${data.tipo.id}&estado=${data.estado.id}&almacen=${data.almacen.id}&marca=${data.marca}&peso=${data.peso}&numero_bultos=${data.numero_bultos}&coste_adecuacion=${data.coste_adecuacion}&valor_estimado=${data.valor_estimado}&reservadoa=${data.reservadoa}&imagen=${data.imagen}`
   }
   const ColunaAccionesInventario = (p) => {
     return <ColumnaDeAcciones data={p.data} deleteAction={deleteInventario} updateRoute={updateRouteInventario} event={setinventarioIsDeleted} />

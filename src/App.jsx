@@ -26,6 +26,7 @@ import ActuacionesProducto from "./pages/ActuacionesProducto/ActuacionesProducto
 import AddActuaciones from "./pages/ActuacionesProducto/AddActuaciones";
 import AddInventario from "./pages/Inventario/AddInventario";
 import UpdateAlmacen from "./pages/Almacen/UpdateAlmacen";
+import UpdateInventario from "./pages/Inventario/UpdateInventario";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -119,6 +120,14 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <FichaProducto />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="inventario/update/:id"
+        element={
+          <AuthGuard>
+            <UpdateInventario />
           </AuthGuard>
         }
       ></Route>
