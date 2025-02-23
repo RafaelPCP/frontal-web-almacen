@@ -7,14 +7,27 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 import { NavLink } from "react-router-dom";
-import { fetchInventarios } from "../../datos/inventario";
+import { fetchInventarios, deleteInventario } from "../../datos/inventario";
+
+import ColumnaDeAcciones from "../../component/ColumnaDeAcciones";
+
 
 export default function Inventario() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState([]); // Initialize with an empty array
+  const [rowData, setRowData] = useState([]);
+  const [inventarioIsDeleted, setinventarioIsDeleted] = useState(false)
+
   useEffect(() => {
     fetchInventarios(setRowData);
-  }, []); // Empty dependency array ensures this runs only once
+  }, [, inventarioIsDeleted]);
+
+  const updateRouteInventario = (data) => {
+    return `/Almacen/update/${data.id}?almacen=${data.almacen}&laboratorio=${data.laboratorio}`
+  }
+  const ColunaAccionesInventario = (p) => {
+    return <ColumnaDeAcciones data={p.data} deleteAction={deleteInventario} updateRoute={updateRouteInventario} event={setinventarioIsDeleted} />
+  }
+
 
   const MyCellComponent = (p) => {
     console.log(p.value);
@@ -86,6 +99,11 @@ export default function Inventario() {
       editable: true,
       flex: true,
     },
+    {
+      cellRenderer: ColunaAccionesInventario,
+      filter: "agTextColumnFilter",
+      flex: true
+    }
   ]);
 
   const saveFilterState = useRef();
