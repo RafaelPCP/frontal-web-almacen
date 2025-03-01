@@ -35,10 +35,6 @@ export const fetchListadodocumentos = async (setState) => {
   communs.fetchData("listadodocumentos", setState);
 };
 
-export const addListadodocumentos = async (newListadodocumentos) => {
-  communs.addData("listadodocumentos", newListadodocumentos);
-};
-
 export const updateListadodocumentos = async (listadodocumentosId, updatedData) => {
   communs.updateData("listadodocumentos",listadodocumentosId,updatedData)
 };
@@ -47,3 +43,10 @@ export const deleteListadodocumentos = async (listadodocumentosId) => {
   communs.deleteData("listadodocumentos",listadodocumentosId)
 };
 
+export const addListadodocumentos = async (formData) => {
+  const data = new FormData();
+  Object.keys(formData).forEach(key => {
+      data.append(key, formData[key]);
+  });
+  communs.addData("listadodocumentos",data)
+}

@@ -27,6 +27,7 @@ import AddActuaciones from "./pages/ActuacionesProducto/AddActuaciones";
 import AddInventario from "./pages/Inventario/AddInventario";
 import UpdateAlmacen from "./pages/Almacen/UpdateAlmacen";
 import UpdateInventario from "./pages/Inventario/UpdateInventario";
+import DocumentoUpload from "./pages/test_upload";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -160,6 +161,14 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <Empresas />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="testing"
+        element={
+          <AuthGuard>
+            <DocumentoUpload />
           </AuthGuard>
         }
       ></Route>
