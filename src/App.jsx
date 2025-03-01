@@ -26,6 +26,7 @@ import ActuacionesProducto from "./pages/ActuacionesProducto/ActuacionesProducto
 import AddActuaciones from "./pages/ActuacionesProducto/AddActuaciones";
 import AddInventario from "./pages/Inventario/AddInventario";
 import UpdateAlmacen from "./pages/Almacen/UpdateAlmacen";
+import UpdateActuaciones from "./pages/ActuacionesProducto/UpdateActuaciones";
 import UpdateInventario from "./pages/Inventario/UpdateInventario";
 import DocumentoUpload from "./pages/test_upload";
 
@@ -85,7 +86,7 @@ const router = createBrowserRouter(
         }
       ></Route>
       <Route
-        path="actuacionesproducto"
+        path="ActuacionesProducto"
         element={
           <AuthGuard>
             <ActuacionesProducto />
@@ -93,10 +94,18 @@ const router = createBrowserRouter(
         }
       ></Route>
       <Route
-        path="actuacionesproducto/add"
+        path="ActuacionesProducto/add"
         element={
           <AuthGuard>
             <AddActuaciones />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="ActuacionesProducto/update/:id"
+        element={
+          <AuthGuard>
+            <UpdateActuaciones />
           </AuthGuard>
         }
       ></Route>
