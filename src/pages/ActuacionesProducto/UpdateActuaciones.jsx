@@ -8,28 +8,33 @@ import {
   Container,
   HStack,
   Button,
+  Text,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
 
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { addActuacion } from "../../datos/actuaciones";
+import { fetchActuacionesById, updateActuacion } from "../../datos/actuaciones";
 
-export default function AddActuaciones() {
+export default function UpdateActuaciones() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { id } = useParams();
+  const actuacionOriginal = searchParams.get("actuacionProducto"); 
 
-  const [actuacion, setActuacion] = React.useState("");
 
-  
-  const createActuacion = (event) => {
+  const [actuacion, setActuacion] = React.useState(actuacionOriginal);
+
+  const actualizarActuacion = (event) => {
     event.preventDefault();
-    addActuacion({ actuacion });
+    updateActuacion(id,{ actuacion });
     console.log({ actuacion });
     navigate("/ActuacionesProducto");
   };
+
   enableRipple(true);
   return (
     <Container
@@ -71,6 +76,7 @@ export default function AddActuaciones() {
               <Input
                 placeholder="Actuacion"
                 onChange={(e) => setActuacion(e.target.value)}
+                value={actuacion}
               />
             </FormControl>
           </HStack>
@@ -84,7 +90,7 @@ export default function AddActuaciones() {
           colorScheme="blue"
           align="center"
           leftIcon={<TfiSave />}
-          onClick={createActuacion}
+          onClick={actualizarActuacion}
         >
           Guardar
         </Button>

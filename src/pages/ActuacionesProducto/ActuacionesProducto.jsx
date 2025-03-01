@@ -12,18 +12,34 @@ import {} from "@chakra-ui/icons";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-
+import {  fetchActuaciones, deleteActuacion } from "../../datos/actuaciones"
 import { NavLink } from "react-router-dom";
-import { fetchActuaciones } from "../../datos/actuaciones"
+
+import ColumnaDeAcciones from "../../component/ColumnaDeAcciones";
 
 export default function ActuacionesProducto() {
   const gridRef = useRef();
   const [rowData, setRowData] = useState([]);
+  const [actuacionIsDeleted, setActuacionIsDeleted] = useState(false)
   useEffect(() => {
     fetchActuaciones(setRowData);
-  }, []); // Empty dependency array ensures this runs only once
-
-
+  }, [actuacionIsDeleted]);  
+  
+  const updateRouteActuacion = (data) => {
+    return `update/${data.id}?actuacion=${data.ActuacionesProducto}`
+  }
+  const ColunaAccionesActuacion = (p) => {
+    return <ColumnaDeAcciones data={p.data} deleteAction={deleteActuacion} updateRoute={updateRouteActuacion} event={setActuacionIsDeleted} />
+  }
+  
+  const defaultColDef = useMemo(
+    () => ({
+      flex: 1,
+      floatingFilter: true,
+      filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
+    }),
+    []
+  );
 
   const [botonpulsado, setbotonPulsado] = useState();
 
@@ -37,15 +53,14 @@ export default function ActuacionesProducto() {
     {
       field: "actuacion",
       editable: true,
+    },{
+      cellRenderer: ColunaAccionesActuacion,
+      filter: "agTextColumnFilter",
+      filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
     },
   ]);
 
-  const defaultColDef = useMemo(
-    () => ({
-      flex: 1,
-    }),
-    []
-  );
+  
   return (
     <Container
       id="id"
@@ -56,6 +71,7 @@ export default function ActuacionesProducto() {
       maxWidth="500px"
       maxHeight="100%"
     >
+        <Center height="20px"></Center>
       <div bg="white" className="ag-theme-quartz" style={{ height: "700px" }}>
         {" "}
         <AgGridReact
