@@ -23,11 +23,6 @@ export const actuaciones = [
 
 import * as communs from "./communs";
 
-export const fetchActuacionesById = async(setState, id) => {
-  console.log("called")
-  communs.fetchData(`actuaciones${id}`, setState);
-};
-
 export const fetchActuaciones = async (setState) => {
   communs.fetchData("actuaciones", setState);
 };
