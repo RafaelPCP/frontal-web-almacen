@@ -17,13 +17,13 @@ import { Form, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { fetchActuacionesById, updateActuacion } from "../../datos/actuaciones";
+import { updateActuacion } from "../../datos/actuaciones";
 
 export default function UpdateActuaciones() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { id } = useParams();
-  const actuacionOriginal = searchParams.get("actuacionProducto"); 
+  const actuacionOriginal = searchParams.get("actuacion"); 
 
 
   const [actuacion, setActuacion] = React.useState(actuacionOriginal);
