@@ -26,7 +26,7 @@ export default function ActuacionesProducto() {
   }, [actuacionIsDeleted]);  
   
   const updateRouteActuacion = (data) => {
-    return `update/${data.id}?actuacion=${data.ActuacionesProducto}`
+    return `update/${data.id}?actuacion=${data.actuacion}`
   }
   const ColunaAccionesActuacion = (p) => {
     return <ColumnaDeAcciones data={p.data} deleteAction={deleteActuacion} updateRoute={updateRouteActuacion} event={setActuacionIsDeleted} />
