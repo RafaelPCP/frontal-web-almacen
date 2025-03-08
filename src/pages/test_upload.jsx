@@ -10,8 +10,8 @@ export default function DocumentoUpload() {
         titulo: "",
         documento: "",
         fecha: "2025-03-01",
-        datos_del_documento: null,
-        producto: 0
+        datos_del_documento:"",
+        producto: 5 // Esto esta fijado a 0 pero en la realidad habra que fijarlo al producto que sea
     });
 
     const handleChange = (e) => {
@@ -24,7 +24,9 @@ export default function DocumentoUpload() {
     };
 
     const handleSubmit = (e)=>{
+        console.log("handling")
         addListadodocumentos(formData);
+        console.log("handled")
     }
 
     return (
@@ -41,7 +43,6 @@ export default function DocumentoUpload() {
             <div className="ag-theme-quartz" style={{ height: "700px" }}>
                 <div className="p-4 max-w-md mx-auto border rounded shadow">
                     <h2 className="text-lg font-bold mb-4">Upload a File</h2>
-                    <form action="#" method="post" encType="multipart/form-data">
                         <label htmlFor="titulo">Título:</label>
                         <input type="text" id="titulo" name="titulo" value={formData.titulo} onChange={handleChange} required/><br/><br/>
                         
@@ -52,12 +53,9 @@ export default function DocumentoUpload() {
                         <input type="date" id="fecha" name="fecha" value={formData.fecha} onChange={handleChange} required/><br/><br/>
                         
                         <label htmlFor="datos_del_documento">Datos del Documento:</label>
-                        <input type="file" id="datos_del_documento" name="datos_del_documento" value={formData.datos_del_documento} onChange={handleFileChange} required/><br/><br/>                        
-                        <label htmlFor="producto">Producto:</label>
-                        <input type="number" id="producto" name="producto" value={formData.producto} onChange={handleChange} required/><br/><br/>
+                        <input type="file" id="datos_del_documento" name="datos_del_documento" onChange={handleFileChange} required/><br/><br/>                        
                         
                         <button type="submit" onClick={handleSubmit}>Submit</button>
-                    </form>
                 </div>
             </div>
         </Container>
