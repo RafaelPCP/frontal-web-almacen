@@ -1,4 +1,4 @@
-const apiRequest = async (endpoint, method = "GET", body = null) => {
+const apiRequest = async (endpoint, method = "GET", body = null, contentType="application/json") => {
   const authHeader = localStorage.getItem("authHeader");
 
   if (!authHeader) {
@@ -9,12 +9,14 @@ const apiRequest = async (endpoint, method = "GET", body = null) => {
     method, // HTTP method (GET, POST, PUT, DELETE, etc.)
     headers: {
       Authorization: authHeader,
-      "Content-Type": "application/json", // Assume JSON; adjust if necessary
     },
   };
 
-  if (body) {
+  if (body && contentType=="application/json") {
     options.body = JSON.stringify(body); // Add the body if provided
+    options.headers["Content-Type"] = contentType
+  }else{
+    options.body = body;
   }
 
   try {
@@ -55,6 +57,16 @@ export const fetchData = async (endpoint, setState) => {
 export const addData = async (endpoint, newData) => {
   try {
     const response = await apiRequest(endpoint, "POST", newData);
+    console.log(`${endpoint} added:`, response);
+  } catch (error) {
+    console.error(`Failed to add ${endpoint}:`, error.message);
+  }
+};
+
+// Add file data (POST) the same but using different headers
+export const addFileData = async (endpoint, newData) => {
+  try {
+    const response = await apiRequest(endpoint, "POST", newData, "Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryXYZ");
     console.log(`${endpoint} added:`, response);
   } catch (error) {
     console.error(`Failed to add ${endpoint}:`, error.message);

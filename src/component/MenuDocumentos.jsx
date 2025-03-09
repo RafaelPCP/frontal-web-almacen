@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import ListadoDocumentos from "../component/ListadoDocumentos";
+import { NavLink } from "react-router-dom";
 
 export default function MenuDocumentos(id) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,7 +34,7 @@ export default function MenuDocumentos(id) {
         placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size={"md"}
+        size={"full"}
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -45,7 +46,9 @@ export default function MenuDocumentos(id) {
             </Box>
           </DrawerBody>
           <DrawerFooter>
+            <NavLink to={"upload"}>
             <Button colorScheme="blue">Añadir</Button>
+            </NavLink>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

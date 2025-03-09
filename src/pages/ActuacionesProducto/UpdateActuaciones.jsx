@@ -8,33 +8,37 @@ import {
   Container,
   HStack,
   Button,
+  Text,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
 
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { addAlmacen } from "../datos/almacenes";
+import { updateActuacion } from "../../datos/actuaciones";
 
-export default function AddAlmacen() {
+export default function UpdateActuaciones() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { id } = useParams();
+  const actuacionOriginal = searchParams.get("actuacion"); 
 
-  const [laboratorio, setLaboratorio] = React.useState("");
-  const [almacen, setAlmacen] = React.useState("");
 
-  const createAlmacen = (event) => {
+  const [actuacion, setActuacion] = React.useState(actuacionOriginal);
+
+  const actualizarActuacion = (event) => {
     event.preventDefault();
-    addAlmacen({ laboratorio, almacen });
-    console.log({ laboratorio, almacen });
-    navigate("/Almacen");
+    updateActuacion(id,{ actuacion });
+    console.log({ actuacion });
+    navigate("/ActuacionesProducto");
   };
 
   enableRipple(true);
   return (
     <Container
-      id="almac"
+      id="estad"
       pl="10px"
       pr="10px"
       pt="120"
@@ -54,7 +58,7 @@ export default function AddAlmacen() {
           <Flex p="2">
             <Spacer />
             <Text textAlign="center" fontSize={28}>
-              Ficha del Equipo
+              Actuaciones Producto
             </Text>
             <Spacer />
             <button onClick={() => navigate(-1)}>{} ↩️</button>
@@ -65,25 +69,14 @@ export default function AddAlmacen() {
             <FormControl
               borderColor="blue.900"
               pl="10px"
-              width={450}
+              width={900}
               isRequired
             >
-              <FormLabel>Laboratorio</FormLabel>
+              <FormLabel>Actuacion</FormLabel>
               <Input
-                placeholder="Laboratorio"
-                onChange={(e) => setLaboratorio(e.target.value)}
-              />
-            </FormControl>
-            <FormControl
-              borderColor="blue.900"
-              pl="10px"
-              width={450}
-              isRequired
-            >
-              <FormLabel>Almacen</FormLabel>
-              <Input
-                placeholder="Almacen"
-                onChange={(e) => setAlmacen(e.target.value)}
+                placeholder="Actuacion"
+                onChange={(e) => setActuacion(e.target.value)}
+                value={actuacion}
               />
             </FormControl>
           </HStack>
@@ -97,7 +90,7 @@ export default function AddAlmacen() {
           colorScheme="blue"
           align="center"
           leftIcon={<TfiSave />}
-          onClick={createAlmacen}
+          onClick={actualizarActuacion}
         >
           Guardar
         </Button>

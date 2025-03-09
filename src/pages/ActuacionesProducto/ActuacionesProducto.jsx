@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,22 +12,37 @@ import {} from "@chakra-ui/icons";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-
-import { _FloatingFilterModule } from "ag-grid-community";
-import { blueGrey, red } from "@mui/material/colors";
-
+import {  fetchActuaciones, deleteActuacion } from "../../datos/actuaciones"
 import { NavLink } from "react-router-dom";
-import { actuaciones } from "../datos/actuaciones";
-import { TfiSave } from "react-icons/tfi";
-import { FaPencil } from "react-icons/fa6";
-import { RiDeleteBack2Fill } from "react-icons/ri";
-import { IoIosAddCircle } from "react-icons/io";
+
+import ColumnaDeAcciones from "../../component/ColumnaDeAcciones";
 
 export default function ActuacionesProducto() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState(actuaciones);
+  const [rowData, setRowData] = useState([]);
+  const [actuacionIsDeleted, setActuacionIsDeleted] = useState(false)
+  useEffect(() => {
+    fetchActuaciones(setRowData);
+  }, [actuacionIsDeleted]);  
+  
+  const updateRouteActuacion = (data) => {
+    return `update/${data.id}?actuacion=${data.actuacion}`
+  }
+  const ColunaAccionesActuacion = (p) => {
+    return <ColumnaDeAcciones data={p.data} deleteAction={deleteActuacion} updateRoute={updateRouteActuacion} event={setActuacionIsDeleted} />
+  }
+  
+  const defaultColDef = useMemo(
+    () => ({
+      flex: 1,
+      floatingFilter: true,
+      filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
+    }),
+    []
+  );
 
   const [botonpulsado, setbotonPulsado] = useState();
+
 
   const [columnDefs, setColumnDefs] = useState([
     {
@@ -38,15 +53,14 @@ export default function ActuacionesProducto() {
     {
       field: "actuacion",
       editable: true,
+    },{
+      cellRenderer: ColunaAccionesActuacion,
+      filter: "agTextColumnFilter",
+      filterParams: { buttons: ["apply", "clear", "cancel", "reset"] },
     },
   ]);
 
-  const defaultColDef = useMemo(
-    () => ({
-      flex: 1,
-    }),
-    []
-  );
+  
   return (
     <Container
       id="id"
@@ -57,6 +71,7 @@ export default function ActuacionesProducto() {
       maxWidth="500px"
       maxHeight="100%"
     >
+        <Center height="20px"></Center>
       <div bg="white" className="ag-theme-quartz" style={{ height: "700px" }}>
         {" "}
         <AgGridReact
@@ -84,23 +99,3 @@ export default function ActuacionesProducto() {
     </Container>
   );
 }
-
-/*
-<ButtonGroup variant="outline" spacing="2">
-        <Button colorScheme="blue" leftIcon={<FaPencil />}>
-          Modificar
-        </Button>
-        <Button colorScheme="blue" leftIcon={<RiDeleteBack2Fill />}>
-          Borrar
-        </Button>
-
-        <Button
-          fontSize={14}
-          variant="outline"
-          colorScheme="purple"
-          leftIcon={<IoIosAddCircle />}
-        >
-          Nueva Actuación
-        </Button>
-      </ButtonGroup>
-      */

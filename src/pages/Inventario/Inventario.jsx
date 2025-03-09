@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { Button, Center, Container } from "@chakra-ui/react";
 import {} from "@chakra-ui/icons";
 
@@ -6,33 +6,28 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-import { _FloatingFilterModule } from "ag-grid-community";
-import { blueGrey, red } from "@mui/material/colors";
-
 import { NavLink } from "react-router-dom";
-import { inventario } from "../datos/inventario";
+import { fetchInventarios, deleteInventario } from "../../datos/inventario";
+
+import ColumnaDeAcciones from "../../component/ColumnaDeAcciones";
+
 
 export default function Inventario() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState(inventario);
+  const [rowData, setRowData] = useState([]);
+  const [inventarioIsDeleted, setinventarioIsDeleted] = useState(false)
 
-  const [botonpulsado, setbotonPulsado] = useState();
+  useEffect(() => {
+    fetchInventarios(setRowData);
+  }, [, inventarioIsDeleted]);
 
-  /*
- const MyCellComponent = (p) => {
-    return (
-      <>
-        <NavLink state={{ some: "Prueba envío datos" }} to="/FichaProducto/">
-          <Button onClick={() => setbotonPulsado("Ficha Producto")}>▶️</Button>
-          console.log({p.value.estado});
-        </NavLink>
-        {p.value}
-      </>
-    );
-  };
-  */
-  //     <NavLink to={"/Inventario/" + p.value}>
-  //    onClick={() => setbotonPulsado("Ficha Producto")}
+  const updateRouteInventario = (data) => {
+    return `/Inventario/update/${data.id}?equipo=${data.equipo}&etiqueta=${data.etiqueta}&numero_serie=${data.numero_serie}&tipo=${data.tipo.id}&estado=${data.estado.id}&almacen=${data.almacen.id}&marca=${data.marca}&peso=${data.peso}&numero_bultos=${data.numero_bultos}&coste_adecuacion=${data.coste_adecuacion}&valor_estimado=${data.valor_estimado}&reservadoa=${data.reservadoa}&imagen=${data.imagen}`
+  }
+  const ColunaAccionesInventario = (p) => {
+    return <ColumnaDeAcciones data={p.data} deleteAction={deleteInventario} updateRoute={updateRouteInventario} event={setinventarioIsDeleted} />
+  }
+
 
   const MyCellComponent = (p) => {
     console.log(p.value);
@@ -81,7 +76,7 @@ export default function Inventario() {
       flex: true,
     },
     {
-      field: "Almacen",
+      field: "almacen.almacen",
       filter: "agTextColumnFilter",
       editable: true,
       flex: true,
@@ -93,17 +88,22 @@ export default function Inventario() {
       flex: true,
     },
     {
-      field: "estado",
+      field: "estado.estado",
       filter: "agTextColumnFilter",
       editable: true,
       flex: true,
     },
     {
-      field: "tipo",
+      field: "tipo.tipo",
       filter: "agTextColumnFilter",
       editable: true,
       flex: true,
     },
+    {
+      cellRenderer: ColunaAccionesInventario,
+      filter: "agTextColumnFilter",
+      flex: true
+    }
   ]);
 
   const saveFilterState = useRef();

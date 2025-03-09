@@ -29,7 +29,7 @@ import {
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { empresas } from "../datos/empresas";
+import { empresas } from "../../datos/empresas";
 
 import {
   _FloatingFilterModule,
@@ -156,15 +156,6 @@ export default function Empresas() {
           paginationPageSizeSelector={[10, 20]}
           pagination={true}
         ></AgGridReact>{" "}
-        <NavLink to={"/Empresas/add"}>
-          <Button
-            align={"center"}
-            colorScheme="blue"
-            onClick={() => setbotonPulsado("Empresa")}
-          >
-            Añadir
-          </Button>
-        </NavLink>
       </div>
     </Container>
   );

@@ -32,9 +32,9 @@ export const addActuacion = async (newActuacion) => {
 };
 
 export const updateActuacion = async (actuacionId, updatedData) => {
-  communs.updateData("actuaciones",actuacionId,updatedData)
+  communs.updateData("actuaciones",actuacionId,updatedData);
 };
 
 export const deleteActuacion = async (actuacionId) => {
-  communs.deleteData("actuaciones",actuacionId)
+  communs.deleteData("actuaciones", actuacionId);
 };

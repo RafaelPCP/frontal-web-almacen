@@ -8,28 +8,32 @@ import {
   Container,
   HStack,
   Button,
+  Text,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
 
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { addEmpresa } from "../datos/empresas";
+import { fetchAlmacenById, updateAlmacen } from "../../datos/almacenes";
 
-export default function AddEmpresas() {
+export default function UpdateAlmacen() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { id } = useParams();
+  const almacenOriginal = searchParams.get("almacen"); 
+  const laboratorioOriginal = searchParams.get("laboratorio")
+ 
+  const [laboratorio, setLaboratorio] = React.useState(laboratorioOriginal);
+  const [almacen, setAlmacen] = React.useState(almacenOriginal);
 
-  const [nombre, setNombre] = React.useState("");
-  const [ubicación, setUbicacion] = React.useState("");
-  const [contacto, setContacto] = React.useState("");
-
-  const createEmpresa = (event) => {
+  const actualizarAlmacen = (event) => {
     event.preventDefault();
-    addEmpresa({ nombre, ubicación, contacto });
-    console.log({ nombre, ubicación, contacto });
-    navigate("/Empresas");
+    updateAlmacen(id,{ laboratorio, almacen });
+    console.log({ laboratorio, almacen });
+    navigate("/Almacen");
   };
 
   enableRipple(true);
@@ -55,7 +59,7 @@ export default function AddEmpresas() {
           <Flex p="2">
             <Spacer />
             <Text textAlign="center" fontSize={28}>
-              Empresa
+              Ficha del Equipo
             </Text>
             <Spacer />
             <button onClick={() => navigate(-1)}>{} ↩️</button>
@@ -69,10 +73,11 @@ export default function AddEmpresas() {
               width={450}
               isRequired
             >
-              <FormLabel>Nombre</FormLabel>
+              <FormLabel>Laboratorio</FormLabel>
               <Input
-                placeholder="Nombre"
-                onChange={(e) => setNombre(e.target.value)}
+                placeholder="Laboratorio"
+                onChange={(e) => setLaboratorio(e.target.value)}
+                value={laboratorio}
               />
             </FormControl>
             <FormControl
@@ -81,22 +86,11 @@ export default function AddEmpresas() {
               width={450}
               isRequired
             >
-              <FormLabel>Ubicacion</FormLabel>
+              <FormLabel>Almacen</FormLabel>
               <Input
-                placeholder="Ubicacion"
-                onChange={(e) => setUbicacion(e.target.value)}
-              />
-            </FormControl>
-            <FormControl
-              borderColor="blue.900"
-              pl="10px"
-              width={450}
-              isRequired
-            >
-              <FormLabel>Contacto</FormLabel>
-              <Input
-                placeholder="Contacto"
-                onChange={(e) => setContacto(e.target.value)}
+                placeholder="Almacen"
+                onChange={(e) => setAlmacen(e.target.value)}
+                value={almacen}
               />
             </FormControl>
           </HStack>
@@ -110,7 +104,7 @@ export default function AddEmpresas() {
           colorScheme="blue"
           align="center"
           leftIcon={<TfiSave />}
-          onClick={createEmpresa}
+          onClick={actualizarAlmacen}
         >
           Guardar
         </Button>

@@ -1,11 +1,7 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import {
-  Box,
   Button,
-  ButtonGroup,
-  Center,
   Container,
-  HStack,
 } from "@chakra-ui/react";
 import {} from "@chakra-ui/icons";
 
@@ -13,19 +9,16 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
-import { _FloatingFilterModule } from "ag-grid-community";
-import { blueGrey, red } from "@mui/material/colors";
-
-import { NavLink } from "react-router-dom";
-import { tipos } from "../datos/tipos";
-import { TfiSave } from "react-icons/tfi";
-import { FaPencil } from "react-icons/fa6";
-import { RiDeleteBack2Fill } from "react-icons/ri";
-import { IoIosAddCircle } from "react-icons/io";
+import { NavLink} from "react-router-dom";
+import { tipos, fetchTipos } from "../../datos/tipos";
 
 export default function TiposProducto() {
   const gridRef = useRef();
-  const [rowData, setRowData] = useState(tipos);
+  const [rowData, setRowData] = useState([]); // Initialize with an empty array
+  useEffect(() => {
+    fetchTipos(setRowData);
+  }, []); // Empty dependency array ensures this runs only once
+
 
   const [botonpulsado, setbotonPulsado] = useState();
 
@@ -37,7 +30,7 @@ export default function TiposProducto() {
     },
     {
       field: "tipo",
-      editable: true,
+      editable: false,
     },
   ]);
 
@@ -71,34 +64,7 @@ export default function TiposProducto() {
           paginationPageSizeSelector={[10, 30]}
           pagination={true}
         ></AgGridReact>
-        <NavLink to={"/TiposProducto/add"}>
-          <Button
-            align={"center"}
-            colorScheme="blue"
-            onClick={() => setbotonPulsado("Ficha Producto")}
-          >
-            Añadir
-          </Button>
-        </NavLink>
       </div>
     </Container>
   );
 }
-
-/*
-<ButtonGroup variant="outline" spacing="2">
-        <Button colorScheme="blue" leftIcon={<FaPencil />}>
-          Modificar
-        </Button>
-        <Button colorScheme="blue" leftIcon={<RiDeleteBack2Fill />}>
-          Borrar
-        </Button>
-        <Button
-          fontSize={14}
-          colorScheme="purple"
-          leftIcon={<IoIosAddCircle />}
-        >
-          Nuevo Tipo
-        </Button>
-      </ButtonGroup>
-      */

@@ -196,5 +196,5 @@ export const updateInventario = async (inventarioId, updatedData) => {
 };
 
 export const deleteInventario = async (inventarioId) => {
-  communs.deleteData("inventarios", inventarioId);
+  await communs.deleteData("inventarios", inventarioId);
 };

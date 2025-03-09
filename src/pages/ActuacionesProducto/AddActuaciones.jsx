@@ -16,18 +16,19 @@ import { TfiSave } from "react-icons/tfi";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { Flex, Spacer } from "@chakra-ui/react";
-import { addTipos } from "../datos/tipos";
+import { addActuacion } from "../../datos/actuaciones";
 
-export default function AddTipo() {
+export default function AddActuaciones() {
   const navigate = useNavigate();
 
-  const [tipo, setTipo] = React.useState("");
+  const [actuacion, setActuacion] = React.useState("");
 
-  const createTipo = (event) => {
+  
+  const createActuacion = (event) => {
     event.preventDefault();
-    addTipos({ tipo });
-    console.log({ tipo });
-    navigate("/TiposProducto");
+    addActuacion({ actuacion });
+    console.log({ actuacion });
+    navigate("/ActuacionesProducto");
   };
   enableRipple(true);
   return (
@@ -52,7 +53,7 @@ export default function AddTipo() {
           <Flex p="2">
             <Spacer />
             <Text textAlign="center" fontSize={28}>
-              Tipos de Productos
+              Actuaciones Producto
             </Text>
             <Spacer />
             <button onClick={() => navigate(-1)}>{} ↩️</button>
@@ -63,13 +64,13 @@ export default function AddTipo() {
             <FormControl
               borderColor="blue.900"
               pl="10px"
-              width={450}
+              width={900}
               isRequired
             >
-              <FormLabel>Tipo</FormLabel>
+              <FormLabel>Actuacion</FormLabel>
               <Input
-                placeholder="Tipo"
-                onChange={(e) => setTipo(e.target.value)}
+                placeholder="Actuacion"
+                onChange={(e) => setActuacion(e.target.value)}
               />
             </FormControl>
           </HStack>
@@ -83,7 +84,7 @@ export default function AddTipo() {
           colorScheme="blue"
           align="center"
           leftIcon={<TfiSave />}
-          onClick={createTipo}
+          onClick={createActuacion}
         >
           Guardar
         </Button>
