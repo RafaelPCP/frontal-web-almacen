@@ -19,6 +19,8 @@ import Usuario from "./pages/Usuario";
 import Configura from "./pages/Configura";
 import FichaProducto from "./pages/FichaProducto";
 import AddAlmacen from "./pages/Almacen/AddAlmacen";
+import UploadDocument from "./pages/Inventario/UploadDocument";
+import UpdateDocument from "./pages/Inventario/UpdateDocument";
 
 import TiposProducto from "./pages/TiposProducto/TiposProducto";
 import EstadosProducto from "./pages/EstadosProducto/EstadosProducto";
@@ -138,6 +140,22 @@ const router = createBrowserRouter(
         element={
           <AuthGuard>
             <UpdateInventario />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="inventario/:id/upload"
+        element={
+          <AuthGuard>
+            <UploadDocument />
+          </AuthGuard>
+        }
+      ></Route>
+      <Route
+        path="inventario/:id/documento/:idDocumento/update"
+        element={
+          <AuthGuard>
+            <UpdateDocument />
           </AuthGuard>
         }
       ></Route>

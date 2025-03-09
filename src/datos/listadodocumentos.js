@@ -1,7 +1,7 @@
 export const listadodocumentos = [
   {
     id: "1",
-    id_producto: "1",
+    id_producto: "6",
     titulo: "manual pulidora",
     documento: "manualpulidora",
     fecha: "01/03/2024",
@@ -30,9 +30,22 @@ export const listadodocumentos = [
 ];
 
 import * as communs from "./communs";
-
+export const fetchListadodocumentosWrapper = () => {
+  return new Promise((resolve, reject) => {
+    fetchListadodocumentos((data) => {
+      if (data) {
+        resolve(data);
+      } else {
+        reject(new Error("Failed to fetch listadodocumentos"));
+      }
+    });
+  });
+};
 export const fetchListadodocumentos = async (setState) => {
   communs.fetchData("listadosdocumentos", setState);
+};
+export const fetchListadodocumentosById = async (setState) => {
+ communs.fetchData(`listadosdocumentos/${id}`, setState);
 };
 
 export const updateListadodocumentos = async (listadodocumentosId, updatedData) => {
@@ -50,4 +63,6 @@ export const addListadodocumentos = async (formData) => {
   });
   console.log(`Data: ${data}`);
   communs.addFileData("listadosdocumentos", data);
-}
+};
+
+

@@ -11,7 +11,7 @@ export default function DocumentoUpload() {
         documento: "",
         fecha: "2025-03-01",
         datos_del_documento:"",
-        producto: 5 // Esto esta fijado a 0 pero en la realidad habra que fijarlo al producto que sea
+        producto: 1 // Esto esta fijado a 0 pero en la realidad habra que fijarlo al producto que sea
     });
 
     const handleChange = (e) => {
